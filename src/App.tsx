@@ -53,6 +53,8 @@
 import { useEffect, useState } from "react";
 import Logo from "./assets/logo.png";
 import { COLORS } from "./utils/global";
+import Input from "./components/Input";
+import Button from "./components/Button";
 
 
 
@@ -143,37 +145,9 @@ export default function App() {
                   e.preventDefault();
 
                 }}>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                      Email address
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        autoComplete="email"
-                        required
-                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-3 sha placeholder-gray-400 shadow-md focus:border-orange-500 focus:outline-none focus:ring-orange-500 sm:text-sm"
-                      />
-                    </div>
-                  </div>
+                  <Input type="email" label="Email Address" required={true} name="emaail" placeholder="Enter Your Email" />
 
-                  <div className="space-y-1">
-                    <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                      Password
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        id="password"
-                        name="password"
-                        type="password"
-                        autoComplete="current-password"
-                        required
-                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-3 placeholder-gray-400 shadow-md focus:border-orange-500 focus:outline-none focus:ring-orange-500 sm:text-sm"
-                      />
-                    </div>
-                  </div>
+                  <Input type="password" label="Password " required={true} name="emaail" placeholder="Enter Your Email" />
 
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
@@ -189,19 +163,14 @@ export default function App() {
                     </div>
 
                     <div className="text-sm">
-                      <a href="#" className="font-medium text-orange-600 hover:text-orange-500">
+                      <a href="#" className={`font-medium text-[#2fa6de]`}>
                         Forgot your password?
                       </a>
                     </div>
                   </div>
 
                   <div>
-                    <button
-                      type="submit"
-                      className="flex w-full justify-center rounded-md border border-transparent bg-orange-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
-                    >
-                      Sign in
-                    </button>
+                    <Button label="Sign In" type="submit" />
                   </div>
                 </form>
               </div>
