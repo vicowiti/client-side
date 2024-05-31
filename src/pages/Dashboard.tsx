@@ -45,14 +45,14 @@ const Dashboard = () => {
     return (
         <div className='text-black bg-[#f0eff4] lg:pt-[11rem] pt-[11rem] min-h-screen p-4 lg:p-8 rounded-t-2xl'>
 
-            <section className='flex-col lg:flex-row  rounded-xl w-full flex items-center gap-4  justify-between'>
-                {cards.map(item => <article style={{ backgroundColor: item.bg }} key={item.id} className='flex p-3 w-full flex-1 h-[12rem] rounded-xl shadow-md items-center gap-5'>
-                    <div className='p-5 hover:scale-110 duration-300 rounded-full shadow-xl bg-[white]'>
+            <section className='flex-col lg:flex-row  rounded-xl w-full  grid grid-cols-2 lg:grid-cols-4 items-center gap-4  justify-between'>
+                {cards.map(item => <article style={{ backgroundColor: item.bg }} key={item.id} className='flex flex-col lg:flex-row p-3 w-full flex-1 h-[9rem] rounded-xl shadow-md items-center gap-5'>
+                    <div className='p-2 lg:p-5 hover:scale-110 duration-300 rounded-full shadow-xl bg-[white]'>
                         <item.icon size={25} color={item.bg} />
                     </div>
                     <div>
-                        <p className='text-white'>{item.name}</p>
-                        <p className='text-white font-bold text-3xl'>{item.amount}</p>
+                        <p className='text-white text-center'>{item.name}</p>
+                        <p className='text-white font-bold text-xl lg:text-3xl text-center'>{item.amount}</p>
                     </div>
                 </article>)}
             </section>

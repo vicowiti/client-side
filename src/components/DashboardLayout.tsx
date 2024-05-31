@@ -10,7 +10,7 @@ const DashboardLayout = (props: Props) => {
     return (
         <div className="min-h-screen flex relative bg-white">
             <SideBar />
-            <div className="lg:pl-[19rem] pr-3 w-full">
+            <div className="lg:pl-[19rem]  w-full">
                 <DashHeader />
                 {props.children}
             </div>
