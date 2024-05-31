@@ -55,6 +55,7 @@ import Logo from "./assets/logo.png";
 import { COLORS } from "./utils/global";
 import Input from "./components/Input";
 import Button from "./components/Button";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -69,6 +70,7 @@ export default function App() {
   const colors = ["teal", COLORS.primaryGreen, COLORS.primaryBlue, COLORS.miniGreen, "blue"]
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [isAnimatingOut, setIsAnimatingOut] = useState(false);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -143,6 +145,7 @@ export default function App() {
               <div className="mt-6">
                 <form className="space-y-6" onSubmit={async (e) => {
                   e.preventDefault();
+                  navigate("/dashboard")
 
                 }}>
                   <Input type="email" label="Email Address" required={true} name="emaail" placeholder="Enter Your Email" />

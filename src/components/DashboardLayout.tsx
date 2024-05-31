@@ -1,37 +1,21 @@
-import React from 'react'
+import React from "react"
+import SideBar from "./SideBar"
+import DashHeader from "./DashHeader"
 
 interface Props {
     children: React.ReactNode
 }
+
 const DashboardLayout = (props: Props) => {
     return (
-
-        <div>
+        <div className="min-h-screen flex relative bg-white">
             <SideBar />
-            <div>
-                <DashboardHeader />
+            <div className="lg:pl-[19rem] pr-3 w-full">
+                <DashHeader />
                 {props.children}
             </div>
-
         </div>
     )
 }
 
 export default DashboardLayout
-
-
-const SideBar = () => {
-    return (
-        <div>
-            <h1>SideBar</h1>
-        </div>
-    )
-}
-
-const DashboardHeader = () => {
-    return (
-        <div>
-            <h1>DashboardHeader</h1>
-        </div>
-    )
-}

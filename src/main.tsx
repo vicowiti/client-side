@@ -6,11 +6,21 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import "./index.css";
+import Dashboard from './pages/Dashboard.tsx';
+import DashboardLayout from './components/DashboardLayout.tsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout><Dashboard /></DashboardLayout>
+  },
+  {
+    path: "/schools",
+    element: <DashboardLayout><Dashboard /></DashboardLayout>
   },
 ]);
 
