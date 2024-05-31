@@ -4,6 +4,7 @@ import { GiNetworkBars } from 'react-icons/gi'
 import { TbZoomCancelFilled } from 'react-icons/tb'
 import { Pie } from '../components/charting/Pie'
 import { Bar } from '../components/charting/Bar'
+import InvoicesTable from '../components/InvoicesTable'
 
 const Dashboard = () => {
 
@@ -13,7 +14,7 @@ const Dashboard = () => {
             name: "Collections",
             icon: BsCollectionFill,
             amount: 200,
-            bg: "#02bd9e",
+            bg: "#018C79",
             bgLight: "#02bd9e"
         },
         {
@@ -42,10 +43,10 @@ const Dashboard = () => {
         }
     ]
     return (
-        <div className='text-black bg-[#f0eff4] min-h-screen p-8 rounded-t-2xl'>
+        <div className='text-black bg-[#f0eff4] lg:pt-[11rem] pt-[11rem] min-h-screen p-4 lg:p-8 rounded-t-2xl'>
 
-            <section className='  rounded-xl w-full flex items-center gap-4  justify-between'>
-                {cards.map(item => <article style={{ backgroundColor: item.bg }} key={item.id} className='flex p-5 flex-1 h-[12rem] rounded-xl shadow-md items-center gap-5'>
+            <section className='flex-col lg:flex-row  rounded-xl w-full flex items-center gap-4  justify-between'>
+                {cards.map(item => <article style={{ backgroundColor: item.bg }} key={item.id} className='flex p-3 w-full flex-1 h-[12rem] rounded-xl shadow-md items-center gap-5'>
                     <div className='p-5 hover:scale-110 duration-300 rounded-full shadow-xl bg-[white]'>
                         <item.icon size={25} color={item.bg} />
                     </div>
@@ -58,7 +59,7 @@ const Dashboard = () => {
 
             <div>
                 <h4 className="text-2xl font-bold text-gray-700 my-3">Targets Overview</h4>
-                <section className='grid grid-cols-2 my-8 gap-10'>
+                <section className='grid grid-cols-1 lg:grid-cols-2 my-8 gap-10'>
                     <div className='rounded-lg bg-white p-10 shadow-lg'>
                         <Pie />
                     </div>
@@ -77,7 +78,7 @@ const Dashboard = () => {
 
             <div>
                 <h4 className="text-2xl font-bold text-gray-700 my-3">SignUps Overview</h4>
-                <section className='grid grid-cols-2 my-8 gap-10'>
+                <section className='grid grid-cols-1 lg:grid-cols-2 my-8 gap-10'>
                     <div className='rounded-lg bg-white p-10 shadow-lg'>
                         <Bar />
                     </div>
@@ -91,6 +92,11 @@ const Dashboard = () => {
                         <Bar />
                     </div>
                 </section>
+            </div>
+
+            <div className='p-4'>
+                <h4 className="text-2xl font-bold p-[-4]] text-gray-700 my-3">Upcoming Invoices</h4>
+                <InvoicesTable />
             </div>
         </div>
     )
