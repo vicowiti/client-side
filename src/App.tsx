@@ -53,24 +53,14 @@
 import { useEffect, useState } from "react";
 import Logo from "./assets/logo.png";
 import { COLORS } from "./utils/global";
-import Input from "./components/Input";
-import Button from "./components/Button";
-import { useNavigate } from "react-router-dom";
-
-
+import AuthForm from "./components/AuthForm";
 
 export default function App() {
-
-  // UE9TLTgwQyAoY29weSAzKQ==
-
-
-
-
   const words = ["School", "Education", "Grades", "Exellence"]
   const colors = ["teal", COLORS.primaryGreen, COLORS.primaryBlue, COLORS.miniGreen, "blue"]
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [isAnimatingOut, setIsAnimatingOut] = useState(false);
-  const navigate = useNavigate()
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -143,39 +133,7 @@ export default function App() {
 
 
               <div className="mt-6">
-                <form className="space-y-6" onSubmit={async (e) => {
-                  e.preventDefault();
-                  navigate("/dashboard")
-
-                }}>
-                  <Input type="email" label="Email Address" required={true} name="emaail" placeholder="Enter Your Email" />
-
-                  <Input type="password" label="Password " required={true} name="emaail" placeholder="Enter Your Email" />
-
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <input
-                        id="remember-me"
-                        name="remember-me"
-                        type="checkbox"
-                        className="h-4 w-4 rounded border-gray-300 text-orange-600 focus:ring-orange-500 checked:fill-orange-600"
-                      />
-                      <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                        Remember me
-                      </label>
-                    </div>
-
-                    <div className="text-sm">
-                      <a href="#" className={`font-medium text-[#2fa6de]`}>
-                        Forgot your password?
-                      </a>
-                    </div>
-                  </div>
-
-                  <div>
-                    <Button label="Sign In" type="submit" />
-                  </div>
-                </form>
+                <AuthForm />
               </div>
             </div>
           </div>
