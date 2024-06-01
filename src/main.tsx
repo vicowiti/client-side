@@ -9,6 +9,8 @@ import "./index.css";
 import Dashboard from './pages/Dashboard.tsx';
 import DashboardLayout from './components/DashboardLayout.tsx';
 import { Toaster } from 'sonner';
+import Schools from './pages/Schools.tsx';
+import SchoolProfile from './pages/SchoolProfile.tsx';
 
 const router = createBrowserRouter([
   {
@@ -21,7 +23,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/schools",
-    element: <DashboardLayout><Dashboard /></DashboardLayout>
+    element: <DashboardLayout><Schools /></DashboardLayout>
+  },
+  {
+    path: "/schools/:id",
+    element: <DashboardLayout><SchoolProfile /></DashboardLayout>
   },
 ]);
 

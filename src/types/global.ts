@@ -5,3 +5,19 @@ export interface User {
   email: string;
   password: string;
 }
+
+export interface School {
+  id: string;
+  name: string;
+  type: string;
+  county: string;
+  contact: string;
+  address: string;
+  balance: number;
+  products: string[];
+}
+
+export interface Product {
+  id: string;
+  name: string;
+}

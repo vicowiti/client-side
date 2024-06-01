@@ -12,7 +12,11 @@ const options = {
     chart: {
         title: "Company Performance",
         subtitle: "Sales, Expenses, and Profit: 2014-2017",
+
+
     },
+
+
 };
 
 export function Bar() {
@@ -23,6 +27,8 @@ export function Bar() {
             height="400px"
             data={data}
             options={options}
+
+
         />
     );
 }

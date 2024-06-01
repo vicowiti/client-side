@@ -8,8 +8,32 @@
       "password": "12345678"
     }
   ],
-  "school": [],
+  "school": [
+    {
+      "id": "1",
+      "name": "Nairobi High School",
+      "type": "Secondary",
+      "county": "Nairobi",
+      "contact": "0712345678",
+      "address": "Waiyaki Way",
+      "balance": 0,
+      "products": ["1", "2", "3"]
+    }
+  ],
   "invoice": [],
   "collection": [],
-  "products": []
+  "products": [
+    {
+      "id": "1",
+      "name": "Zeraki Analytics"
+    },
+    {
+      "id": "2",
+      "name": "Zeraki Finance"
+    },
+    {
+      "id": "3",
+      "name": "Zeraki Timetable"
+    }
+  ]
 }
