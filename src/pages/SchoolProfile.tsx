@@ -78,7 +78,7 @@ const SchoolProfile = () => {
 
                         </div>
                         <div className="flex-1">
-                            <Donut />
+                            <Donut totalProduct={usedProducts.length} />
                         </div>
                     </div>
                 </div>
