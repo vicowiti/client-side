@@ -5,8 +5,9 @@
 1. [Project Description](#description)
 2. [Running Locally](#running)
 3. [Tech Stack](#tech-stack)
-4. [Sample Credentials](#credentials)
-5. [Sample Images](#Project-outlook)
+4. [Sample Auth Credentials](#sample-auth-credentials)
+5. [Resource Mapping](#resoource-mapping)
+6. [Sample Images](#sample-images)
 
 ### Description
 
@@ -45,10 +46,40 @@ npm run dev
 
 - This opens a local dev server on port 5173. Open a browser window and type in the address "http://localhost:5173"
 
+### Sample Auth Credentials
+
+- Use the below credentials to authenticate
+
+```
+email: "john@example.com",
+password: "12345678"
+```
+
 ### Tech Stack
 
-- React JS
-- Typescript
-- React Router
-- Tailwindcss with Headless UI
-- Vitest
+#### React JS
+
+- Used React for its component based architecture, along with hooks to ensure proper data haandling.
+
+#### Typescript
+
+- To implement a strict type system to minimize bugs and for elegant in code documentation
+
+#### React Router
+
+- For route handling, including utilizing its hooks for navigation parameters and Linking different pages.
+
+#### Tailwindcss with Headless UI
+
+-For modern and elegant styling of the application to give it a consistent look.
+
+### Resource Mapping
+
+- Modelling the resources I worked with
+
+![Models](./src//assets/screenshots/models.png)
+
+### Sample Images
+
+![Auth](./src//assets/screenshots/auth.png)
+![Dashboard](./src/assets/screenshots/dashboard.png)
