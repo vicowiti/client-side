@@ -1,10 +1,11 @@
 import axios from "axios";
 import { toast } from "sonner";
 import { School } from "../../types/global";
+import { BASE_URL } from "../../utils/global";
 
 export const getAllSchools = async () => {
   try {
-    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/school`);
+    const response = await axios.get(`${BASE_URL}/school`);
 
     return response.data;
   } catch (error) {
@@ -14,9 +15,7 @@ export const getAllSchools = async () => {
 
 export const getSchoolById = async (id: string) => {
   try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_BASE_URL}/school/${id}`
-    );
+    const response = await axios.get(`${BASE_URL}/school/${id}`);
 
     return response.data;
   } catch (error) {
@@ -28,10 +27,7 @@ type NewSchool = Omit<School, "id">;
 
 export const createSchool = async (school: NewSchool) => {
   try {
-    const response = await axios.post(
-      `${import.meta.env.VITE_BASE_URL}/school`,
-      school
-    );
+    const response = await axios.post(`${BASE_URL}/school`, school);
 
     toast.success("School created successfully.");
 

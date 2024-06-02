@@ -51,7 +51,7 @@ npm run dev
 ### Access Links
 
 - Public Github repo: "https://github.com/vicowiti/client-side"
-- Live Url: ""
+- Live Url: "https://zerakii.netlify.app"
 - Deployed server URL: https://json-server-deploy-xut9.onrender.com
 
 ### Sample Auth Credentials
