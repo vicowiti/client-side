@@ -1,16 +1,16 @@
 
 import { Chart } from "react-google-charts";
 
+interface Props {
+    totalProduct: number
+}
 
-
-export function Donut() {
+export function Donut(props: Props) {
     const data = [
         ["Task", "Hours per Day"],
-        ["Work", 11],
-        ["Eat", 2],
-        ["Commute", 2],
-        ["Watch TV", 2],
-        ["Sleep", 7], // CSS-style declaration
+        ["Used", props.totalProduct],
+        ["Potential", 3 - props.totalProduct],
+
     ];
 
     const options = {
