@@ -4,14 +4,16 @@
 
 1. [Project Description](#description)
 2. [Running Locally](#running)
-3. [Tech Stack](#tech-stack)
-4. [Sample Auth Credentials](#sample-auth-credentials)
-5. [Resource Mapping](#resoource-mapping)
-6. [Sample Images](#sample-images)
+3. [Access Links](#access-links)
+4. [Tech Stack](#tech-stack)
+5. [Sample Auth Credentials](#sample-auth-credentials)
+6. [Resource Mapping](#resource-mapping)
+7. [Sample Images](#sample-images)
 
 ### Description
 
-- A Sales Aagent dashboard that allows users to track product sales by clients(schools). It allows Adding of schools and then linking them with Zeraki Products. Thereafter, users can create invoices based on product usage and create collections based on paymen statuses.
+- A Sales Agent dashboard that allows users to track product sales by clients(schools). It allows Adding of schools and then linking them with Zeraki Products. Thereafter, users can create invoices based on product usage and create collections based on paymen statuses.
+- THe
 
 ### Running locally
 
@@ -45,6 +47,12 @@ npm run dev
 ```
 
 - This opens a local dev server on port 5173. Open a browser window and type in the address "http://localhost:5173"
+
+### Access Links
+
+- Public Github repo: "https://github.com/vicowiti/client-side"
+- Live Url: ""
+- Deployed server URL: https://json-server-deploy-xut9.onrender.com
 
 ### Sample Auth Credentials
 
