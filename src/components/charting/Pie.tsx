@@ -1,45 +1,52 @@
 
 import { Chart } from "react-google-charts";
+import { Product, School } from "../../types/global";
+import { useEffect, useState } from "react";
+import { getAllSchools } from "../../services/schools/data";
 
-export const data = [
-    ["Language", "Speakers (in millions)"],
-    ["Assamese", 13],
-    ["Bengali", 83],
-    ["Bodo", 1.4],
-    ["Dogri", 2.3],
-    ["Gujarati", 46],
-    ["Hindi", 300],
-    ["Kannada", 38],
-    ["Kashmiri", 5.5],
-    ["Konkani", 5],
-    ["Maithili", 20],
-    ["Malayalam", 33],
-    ["Manipuri", 1.5],
-    ["Marathi", 72],
-    ["Nepali", 2.9],
-    ["Oriya", 33],
-    ["Punjabi", 29],
-    ["Sanskrit", 0.01],
-    ["Santhali", 6.5],
-    ["Sindhi", 2.5],
-    ["Tamil", 61],
-    ["Telugu", 74],
-    ["Urdu", 52],
-];
 
-export const options = {
-    title: "Indian Language Use",
-    legend: "none",
-    pieSliceText: "label",
-    slices: {
-        4: { offset: 0.2 },
-        12: { offset: 0.3 },
-        14: { offset: 0.4 },
-        15: { offset: 0.5 },
-    },
-};
 
-export function Pie() {
+interface Props {
+    product: Product
+
+}
+export function Pie(props: Props) {
+    const [schools, setSchools] = useState<School[]>([])
+
+    useEffect(() => {
+        async function fetchStats() {
+
+
+            const myschools = await getAllSchools()
+            setSchools(myschools)
+
+
+
+
+        }
+        fetchStats()
+    }, [])
+
+    const withProduct = schools.filter(item => item.products.includes(props.product.id))
+
+    const data = [
+        ["Targets", "Acquired vs Deficits"],
+        ["Deficit", props.product.target - withProduct.length],
+        ["Acquisitions", withProduct.length],
+
+    ];
+
+    const options = {
+        title: props.product.name,
+        legend: "bottom",
+        pieSliceText: "label",
+        slices: {
+            4: { offset: 0.2 },
+            12: { offset: 0.3 },
+            14: { offset: 0.4 },
+            15: { offset: 0.5 },
+        },
+    };
     return (
         <Chart
             chartType="PieChart"

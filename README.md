@@ -1,5 +1,9 @@
 # Sales Dashboard Tracker.
 
+## Table of Contents
+
+1. 
+
 ### Tech Stack
 
 - React JS
@@ -7,4 +11,3 @@
 - React Router
 - Tailwindcss with Headless UI
 - Vitest
-

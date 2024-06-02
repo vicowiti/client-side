@@ -1,5 +1,6 @@
 import axios from "axios";
 import { toast } from "sonner";
+import { School } from "../../types/global";
 
 export const getAllSchools = async () => {
   try {
@@ -20,5 +21,22 @@ export const getSchoolById = async (id: string) => {
     return response.data;
   } catch (error) {
     toast.error("Could not fetch school.");
+  }
+};
+
+type NewSchool = Omit<School, "id">;
+
+export const createSchool = async (school: NewSchool) => {
+  try {
+    const response = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/school`,
+      school
+    );
+
+    toast.success("School created successfully.");
+
+    return response.data;
+  } catch (error) {
+    toast.error("Could not create school.");
   }
 };

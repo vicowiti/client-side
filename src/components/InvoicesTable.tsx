@@ -1,15 +1,45 @@
-import Slider from "./Slider"
+import { useEffect, useState } from "react"
+import { Invoice } from "../types/global"
+import { getAllInvoices } from '../services/invoices/data';
+import { daysToPay } from "../utils/global";
+import { Link } from "react-router-dom";
 
-const people = [
-    { schoolName: 'Kabarak School', amountDue: 45000, dueDate: Date.now(), id: 1 },
-    // More people...
-]
+
 
 export default function InvoicesTable() {
+
+    const [invoices, setInvoices] = useState<Invoice[]>([])
+
+    useEffect(() => {
+
+        const getInvoices = async () => {
+            const response: Invoice[] = await getAllInvoices()
+
+
+            response.sort((a, b) => {
+                const dateA = new Date(a.dueDate);
+                const dateB = new Date(b.dueDate);
+                return dateA.getTime() - dateB.getTime();
+            });
+
+
+
+            setInvoices(response.slice(0, 5))
+        }
+
+        getInvoices()
+
+
+
+    }, [])
+
+    const today = new Date();
+    const formattedToday = today.toISOString().split('T')[0];
+
     return (
         <section>
             <div className="sm:flex sm:items-center">
-
+                <Link to={`/schools`} className="text-[#018C79]">See More</Link>
 
             </div>
             <div className="mt-8 flex flex-col">
@@ -20,7 +50,7 @@ export default function InvoicesTable() {
                                 <thead className="bg-gray-50">
                                     <tr>
                                         <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                                            School Name
+                                            School Id
                                         </th>
                                         <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                             Amount Due
@@ -30,19 +60,19 @@ export default function InvoicesTable() {
                                         </th>
 
                                         <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                            Quick Actions
+                                            Days to
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-200 bg-white">
-                                    {people.map((school) => (
-                                        <tr key={school.id}>
+                                    {invoices.map((invoice) => (
+                                        <tr key={invoice.id}>
                                             <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                                {school.schoolName}
+                                                {invoice.school_id}
                                             </td>
-                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{school.amountDue}</td>
-                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{school.dueDate}</td>
-                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><Slider /></td>
+                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{invoice.dueAmount}</td>
+                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{invoice.dueDate}</td>
+                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{daysToPay(invoice.dueDate, formattedToday)}</td>
 
 
                                         </tr>

@@ -1,23 +1,38 @@
-import { MdArrowRight } from "react-icons/md"
-import { School } from "../types/global"
-import { Link } from "react-router-dom"
-import AddSchool from "./AddSchool"
+import { useEffect, useState } from "react"
+import { Product } from "../types/global"
+import { getAllProducts } from "../services/products/data"
+import { FaCheck } from "react-icons/fa6"
+import { FaTimes } from "react-icons/fa"
+import AddProduct from "../components/AddProducts"
 
 
-interface Props {
-    schools: School[]
+const Products = () => {
+    return <section className='text-black bg-[#f0eff4] lg:pt-[11rem] pt-[11rem] min-h-screen p-4 lg:p-8 rounded-t-2xl'>
+        <ProductsTable />
+    </section>
 }
+export default Products
 
-export default function SchoolsTable(props: Props) {
+function ProductsTable() {
+
+    const [products, setProducts] = useState<Product[]>([])
+
+    useEffect(() => {
+        async function fetchProducts() {
+            const response = await getAllProducts()
+            setProducts(response)
+        }
+        fetchProducts()
+    }, [])
     return (
-        <div>
+        <div className="px-4 sm:px-6 lg:px-8">
             <div className="sm:flex sm:items-center">
                 <div className="sm:flex-auto">
-                    <h1 className="text-2xl font-semibold text-gray-500">Schools</h1>
+                    <h1 className="text-2xl font-bold text-gray-500">Zeraki Products</h1>
 
                 </div>
                 <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-                    <AddSchool />
+                    <AddProduct />
                 </div>
             </div>
             <div className="mt-8 flex flex-col">
@@ -28,19 +43,19 @@ export default function SchoolsTable(props: Props) {
                                 <thead className="bg-gray-50">
                                     <tr>
                                         <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                            Id
+                                        </th>
+                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                             Name
                                         </th>
                                         <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                            Type
+                                            Target
                                         </th>
                                         <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                            County
+                                            Description
                                         </th>
                                         <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                            Email
-                                        </th>
-                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                            Products
+                                            Active
                                         </th>
                                         <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
                                             <span className="sr-only">Edit</span>
@@ -48,19 +63,19 @@ export default function SchoolsTable(props: Props) {
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-200 bg-white">
-                                    {props?.schools.map((school) => (
-                                        <tr key={school.id}>
+                                    {products.map((product) => (
+                                        <tr key={product.id}>
                                             <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                                {school.name}
+                                                {product.id}
                                             </td>
-                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{school.type}</td>
-                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{school.county}</td>
-                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{school.email}</td>
-                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{school.products?.length}</td>
+                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{product.name}</td>
+                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{product.target}</td>
+                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{product.description.substring(0, 20)}...</td>
+                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{product.active ? <FaCheck color="green" /> : <FaTimes color="red" />}</td>
                                             <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                                <Link to={`/schools/${school.id}`} className="text-indigo-600 hover:text-indigo-900">
-                                                    <MdArrowRight size={30} /><span className="sr-only">, {school.name}</span>
-                                                </Link>
+                                                <a href="#" className="text-indigo-600 hover:text-indigo-900">
+                                                    Edit<span className="sr-only">, {product.name}</span>
+                                                </a>
                                             </td>
                                         </tr>
                                     ))}

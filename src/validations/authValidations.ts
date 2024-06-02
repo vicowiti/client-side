@@ -21,3 +21,14 @@ export const loginSchema = Yup.object().shape({
     .required("Password is required")
     .min(4, "Password must be at least 4 characters long"),
 });
+
+export const newSchoolSchema = Yup.object().shape({
+  name: Yup.string().required("Name is required"),
+  county: Yup.string().required("County is required"),
+  contact: Yup.string().required("Contact is required"),
+  address: Yup.string().required("Address is required"),
+  type: Yup.string().required("Type is required"),
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("Email is required"),
+});

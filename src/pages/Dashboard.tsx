@@ -5,15 +5,46 @@ import { TbZoomCancelFilled } from 'react-icons/tb'
 import { Pie } from '../components/charting/Pie'
 import { Bar } from '../components/charting/Bar'
 import InvoicesTable from '../components/InvoicesTable'
+import { Collection, Product, School } from '../types/global'
+import { useEffect, useState } from 'react'
+import { getAllCollections } from '../services/collections/data'
+import { getAllSchools } from '../services/schools/data'
+import { getAllProducts } from '../services/products/data'
 
 const Dashboard = () => {
+    const [collections, setCollections] = useState<Collection[]>([])
+    const [schools, setSchools] = useState<School[]>([])
+    const [products, setProducts] = useState<Product[]>([])
+    const [revenue, setRevenue] = useState(0)
+    const [bouncedChecks, setBounced] = useState<Collection[]>([])
+
+    useEffect(() => {
+
+        async function fetchStats() {
+            const myCollections: Collection[] = await getAllCollections()
+            setCollections(myCollections)
+
+            const myProducts: Product[] = await getAllProducts()
+            setProducts(myProducts)
+
+            const myschools = await getAllSchools()
+            setSchools(myschools)
+
+            const bounced = myCollections.filter(item => item.status === "Bounced")
+            const valid = myCollections.filter(item => item.status === "Valid")
+
+            setRevenue(valid.reduce((acc, item) => acc + item.amount, 0))
+            setBounced(bounced)
+        }
+        fetchStats()
+    }, [])
 
     const cards = [
         {
             id: 1,
             name: "Collections",
             icon: BsCollectionFill,
-            amount: 200,
+            amount: collections.length,
             bg: "#018C79",
             bgLight: "#02bd9e"
         },
@@ -21,7 +52,7 @@ const Dashboard = () => {
             id: 2,
             name: "Sign Ups",
             icon: GiNetworkBars,
-            amount: 200,
+            amount: schools.length,
             bg: "#43ab49",
             bgLight: "#43ab49"
         },
@@ -29,7 +60,7 @@ const Dashboard = () => {
             id: 3,
             name: "Total Revenue",
             icon: FaMoneyBillTrendUp,
-            amount: 200,
+            amount: revenue,
             bg: "#2fa6de",
             bgLight: "#2fa6de"
         },
@@ -37,7 +68,7 @@ const Dashboard = () => {
             id: 4,
             name: "Bounced Cheques",
             icon: TbZoomCancelFilled,
-            amount: 200,
+            amount: bouncedChecks.length,
             bg: "#111",
             bgLight: "#111"
         }
@@ -59,38 +90,23 @@ const Dashboard = () => {
 
             <div>
                 <h4 className="text-2xl font-bold text-gray-700 my-3">Targets Overview</h4>
-                <section className='grid grid-cols-1 lg:grid-cols-2 my-8 gap-10'>
-                    <div className='rounded-lg bg-white p-10 shadow-lg'>
-                        <Pie />
-                    </div>
-                    <div className='rounded-lg bg-white p-10 shadow-lg'>
-                        <Pie />
-                    </div>
-                    <div className='rounded-lg bg-white p-10 shadow-lg'>
-                        <Pie />
-                    </div>
-                    <div className='rounded-lg bg-white p-10 shadow-lg'>
-                        <Pie />
-                    </div>
+                <section className='grid grid-cols-1 lg:grid-cols-3 my-8 gap-10'>
+                    {products.map(product => <div key={product.id} className='rounded-lg bg-white p-5 shadow-lg'>
+                        <Pie product={product} />
+                    </div>)}
+
 
                 </section>
             </div>
 
             <div>
                 <h4 className="text-2xl font-bold text-gray-700 my-3">SignUps Overview</h4>
-                <section className='grid grid-cols-1 lg:grid-cols-2 my-8 gap-10'>
+                <section className='grid grid-cols-1  my-8 gap-10'>
                     <div className='rounded-lg bg-white p-10 shadow-lg'>
-                        <Bar />
+                        <Bar schools={schools} />
                     </div>
-                    <div className='rounded-lg bg-white p-10 shadow-lg'>
-                        <Bar />
-                    </div>
-                    <div className='rounded-lg bg-white p-10 shadow-lg'>
-                        <Bar />
-                    </div>
-                    <div className='rounded-lg bg-white p-10 shadow-lg'>
-                        <Bar />
-                    </div>
+
+
                 </section>
             </div>
 

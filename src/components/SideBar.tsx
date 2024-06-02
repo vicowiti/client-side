@@ -2,8 +2,9 @@ import { Link, useLocation } from "react-router-dom"
 import Logo from "../assets/zeraki.png"
 import { BiSolidDashboard } from "react-icons/bi"
 import { IoSchool } from "react-icons/io5"
+import { FaCartArrowDown } from "react-icons/fa6"
 
-const navigation = [
+export const navigation = [
     {
         id: 1,
         name: "Dashboard",
@@ -15,6 +16,12 @@ const navigation = [
         name: "Schools",
         href: "/schools",
         icon: IoSchool
+    },
+    {
+        id: 3,
+        name: "Products",
+        href: "/products",
+        icon: FaCartArrowDown
     }
 ]
 
@@ -30,8 +37,8 @@ const SideBar = () => {
                 </header>
 
                 <nav className="mt-10 px-2">
-                    {navigation.map(item => <Link key={item.id} style={{ backgroundColor: location.pathname === item.href ? "#018C79" : "#fff", color: location.pathname === item.href ? "#fff" : "#777", borderRadius: location.pathname === item.href ? "24px" : "0px" }} to={item.href} className={location.pathname === item.href ? `flex mb-2 items-center gap-3 px-5 rounded-3xl text-white shadow-lg py-2 border text-lg` : `flex mb-2 items-center gap-3 px-5 rounded-3xl text-white  py-2  text-lg`}>
-                        <div className="p-2 rounded-xl shadow-md bg-white flex justify-center items-center">
+                    {navigation.map(item => <Link key={item.id} style={{ backgroundColor: location.pathname.includes(item.href) ? "#018C79" : "#fff", color: location.pathname.includes(item.href) ? "#fff" : "#777", borderRadius: location.pathname.includes(item.href) ? "24px" : "0px" }} to={item.href} className={location.pathname.includes(item.href) ? `flex mb-2 items-center gap-3 px-5 rounded-3xl text-white shadow-lg py-2 border text-lg` : `flex mb-2 items-center gap-3 px-5 rounded-3xl text-white  py-2  text-lg`}>
+                        <div className="p-2  rounded-xl shadow-md bg-white flex justify-center items-center">
                             <item.icon size={17} color="#018C79" />
                         </div>
                         {item.name}

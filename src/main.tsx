@@ -11,6 +11,8 @@ import DashboardLayout from './components/DashboardLayout.tsx';
 import { Toaster } from 'sonner';
 import Schools from './pages/Schools.tsx';
 import SchoolProfile from './pages/SchoolProfile.tsx';
+import Products from './pages/Products.tsx';
+import NotFound from './pages/NotFound.tsx';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +30,14 @@ const router = createBrowserRouter([
   {
     path: "/schools/:id",
     element: <DashboardLayout><SchoolProfile /></DashboardLayout>
+  },
+  {
+    path: "/products",
+    element: <DashboardLayout><Products /></DashboardLayout>
+  },
+  {
+    path: "*",
+    element: <DashboardLayout><NotFound /></DashboardLayout>
   },
 ]);
 

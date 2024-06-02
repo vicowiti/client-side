@@ -23,15 +23,7 @@ const Schools = () => {
 
     return (
         <div className='text-black bg-[#f0eff4] lg:pt-[11rem] pt-[11rem] min-h-screen p-4 lg:p-8 rounded-t-2xl'>
-            <h3 className="font-bold text-2xl text-[#777]">Schools</h3>
-
             <SchoolsTable schools={schools} />
-
-
-
-
-
-
         </div>
     )
 }
