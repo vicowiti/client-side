@@ -73,6 +73,10 @@ password: "12345678"
 
 - To implement a strict type system to minimize bugs and for elegant in code documentation
 
+#### Reduc Toolkit
+
+- For efficient global data handling, real time updates without refreshing and minimizing prop drilling
+
 #### React Router
 
 - For route handling, including utilizing its hooks for navigation parameters and Linking different pages.
