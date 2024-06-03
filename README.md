@@ -93,5 +93,6 @@ password: "12345678"
 
 ### Sample Images
 
+![Auth](./src//assets/screenshots/mockup.png)
 ![Auth](./src//assets/screenshots/auth.png)
 ![Dashboard](./src/assets/screenshots/dashboard.png)
