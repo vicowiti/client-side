@@ -1,33 +1,33 @@
 import { Fragment, useEffect, useState } from 'react'
 import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from '@headlessui/react'
 import { FaTimes } from 'react-icons/fa'
-import { Collection, Invoice } from '../types/global'
+import { Invoice } from '../types/global'
 import { MdMoney, MdOutlineNumbers } from 'react-icons/md'
 import { FaClock } from 'react-icons/fa6'
 import { RiVerifiedBadgeFill } from 'react-icons/ri'
-import { getInvoiceCollections } from '../services/collections/data'
+
 import CollectionsModal from './CollectionsModal'
+import { AppDispatch, RootState, useAppDispatch } from '../redux/store/store';
+import { getCurrentInvoiceCollections } from '../redux/slices/CollectionSlice'
+import { useSelector } from 'react-redux'
 
 interface Props {
     invoice: Invoice
 }
 export default function InvoiceSlider(props: Props) {
     const [open, setOpen] = useState(false)
-    const [collections, setCollections] = useState<Collection[]>([])
+    const { invoiceCollections } = useSelector((state: RootState) => state.collection)
+    const dispatch: AppDispatch = useAppDispatch()
 
     useEffect(() => {
 
 
         async function fetchCollections() {
-            const response = await getInvoiceCollections(props.invoice.invoiceNumber)
-            console.log("responsea", response);
-
-
-            setCollections(response)
+            await dispatch(getCurrentInvoiceCollections(props.invoice.invoiceNumber))
         }
 
         fetchCollections()
-    }, [props.invoice.invoiceNumber])
+    }, [props.invoice.invoiceNumber, dispatch])
 
     return (
         <>
@@ -80,15 +80,15 @@ export default function InvoiceSlider(props: Props) {
                                                     <main>
                                                         <div className='flex justify-between items-center my-5'>
                                                             <h2 className=' text-xl font-bold text-grey-500'>Collections</h2>
-                                                            <CollectionsModal mode='create' invoice={props.invoice} />
+                                                            <CollectionsModal close={props.invoice.invoiceNumber} mode='create' invoice={props.invoice} />
                                                         </div>
 
-                                                        {collections.length < 1 && <div>
+                                                        {invoiceCollections.length < 1 && <div>
                                                             <p className='text-[#777] text-center'>You have no Collections yet!</p>
                                                         </div>}
 
                                                         <div>
-                                                            {collections?.map(item => <article className={`${item.status === "Valid" ? "border-t-green-600" : "border-t-red-600"} flex items-center justify-between px-2 py-3 shadow-lg rounded-lg border-t-4`} key={item.id}>
+                                                            {invoiceCollections?.map(item => <article className={`${item.status === "Valid" ? "border-t-green-600" : "border-t-red-600"} flex items-center justify-between px-2 py-3 shadow-lg rounded-lg border-t-4`} key={item.id}>
                                                                 <div>
                                                                     <p>CollectionId:{item.collectionNo}</p>
                                                                     <p>Amount:{item.amount}</p>
@@ -96,7 +96,7 @@ export default function InvoiceSlider(props: Props) {
                                                                 </div>
 
                                                                 <div>
-                                                                    <CollectionsModal mode='edit' invoice={props.invoice} collection={item} />
+                                                                    <CollectionsModal close={props.invoice.invoiceNumber} mode='edit' invoice={props.invoice} collection={item} />
                                                                 </div>
 
                                                             </article>)}
@@ -112,12 +112,6 @@ export default function InvoiceSlider(props: Props) {
                                                     onClick={() => setOpen(false)}
                                                 >
                                                     Cancel
-                                                </button>
-                                                <button
-                                                    type="submit"
-                                                    className="ml-4 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                                                >
-                                                    Save
                                                 </button>
                                             </div>
                                         </div>

@@ -4,8 +4,9 @@ import { FaFileInvoice } from 'react-icons/fa'
 import Input from './Input'
 import { Product } from '../types/global'
 import { toast } from 'sonner'
-import { createInvoice } from '../services/invoices/data'
 import { generateUUID } from '../utils/global'
+import { AppDispatch, useAppDispatch } from '../redux/store/store'
+import { createNewInvoice } from '../redux/slices/InvoiceSlice'
 
 interface Props {
     id: string
@@ -21,15 +22,15 @@ export default function AddInvoice(props: Props) {
     const [created, setCreated] = useState(formattedToday)
     const [due, setDue] = useState("")
     const [product, setProduct] = useState("")
+    const dispatch: AppDispatch = useAppDispatch()
 
 
     const cancelButtonRef = useRef(null)
 
     const handleCreate = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-
         try {
-            await createInvoice({
+            await dispatch(createNewInvoice({
                 amount: Number(amount),
                 creationDate: created,
                 dueDate: due,
@@ -39,7 +40,7 @@ export default function AddInvoice(props: Props) {
                 school_id: props.id,
                 status: "Pending",
                 paidAmount: 0
-            })
+            }))
             setOpen(false)
         } catch (error) {
             toast.error("Invoice ws not created")

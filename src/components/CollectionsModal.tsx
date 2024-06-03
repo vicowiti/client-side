@@ -5,13 +5,17 @@ import { CiEdit } from 'react-icons/ci'
 import Input from './Input'
 import { generateUUID } from '../utils/global'
 import { Collection, Invoice } from '../types/global'
-import { createCollection, editCollection } from '../services/collections/data'
 import { toast } from 'sonner'
+import { AppDispatch, useAppDispatch } from '../redux/store/store'
+import { createNewCollection, editExistingCollection, getCurrentInvoiceCollections } from '../redux/slices/CollectionSlice'
+import { getOneSchoolInvoices } from '../redux/slices/InvoiceSlice'
+import { useParams } from 'react-router-dom'
 
 interface Props {
     mode: "create" | "edit"
     invoice: Invoice
     collection?: Collection
+    close: string
 
 }
 export default function CollectionsModal(props: Props) {
@@ -19,6 +23,9 @@ export default function CollectionsModal(props: Props) {
     const [amount, setAmount] = useState("")
     const [status, setStatus] = useState<"Valid" | "Bounced">("Valid")
     const [date, setDate] = useState("")
+    const dispatch: AppDispatch = useAppDispatch()
+
+    const { id } = useParams()
 
 
 
@@ -38,26 +45,39 @@ export default function CollectionsModal(props: Props) {
 
         if (props.mode === "create") {
             try {
-                await createCollection({
+                await dispatch(createNewCollection({
                     amount: Number(amount),
                     collectionDate: date,
                     invoiceNumber: props.invoice.invoiceNumber,
                     status: status,
                     collectionNo: generateUUID(),
-                })
+                }))
+
+                await dispatch(getCurrentInvoiceCollections(props.close))
+                { id && await dispatch(getOneSchoolInvoices(id)) }
+
                 toast.success("Collection created")
                 setOpen(false)
+
             } catch (error) {
                 toast.error("Collection not created")
                 setOpen(false)
+
+
+                { id && await dispatch(getOneSchoolInvoices(id)) }
             }
 
         } else {
             if (props.collection) {
-                await editCollection({
-                    ...props.collection,
-                    status: status,
-                }, props.collection?.id)
+
+
+                await editExistingCollection({
+                    data: {
+                        ...props.collection,
+                        status: status,
+                    },
+                    id: props.collection?.id
+                })
             }
         }
 

@@ -50,6 +50,20 @@
       "products": [
         "1"
       ]
+    },
+    {
+      "id": "dc26",
+      "name": "bdbbdbab",
+      "type": "IGCSE",
+      "county": "bnm,.xsm",
+      "email": "nmddab@nnd.com",
+      "contact": "34567890",
+      "address": "cvbnm,.d",
+      "balance": 0,
+      "products": [
+        "2",
+        "3"
+      ]
     }
   ],
   "invoice": [
@@ -85,6 +99,24 @@
       "school_id": "c73c",
       "status": "Pending",
       "paidAmount": 0
+    },
+    {
+      "id": "3914",
+      "amount": 5000,
+      "creationDate": "2024-06-03",
+      "dueDate": "2024-06-13",
+      "product": {
+        "id": "3",
+        "name": "Zeraki Timetable",
+        "target": 100,
+        "description": "Zeraki Timetables for students",
+        "active": true
+      },
+      "dueAmount": 4470,
+      "invoiceNumber": "ffe7f684-eb61-4528-963e-1f715a01355e",
+      "school_id": "1",
+      "status": "Pending",
+      "paidAmount": 530
     }
   ],
   "collection": [
@@ -143,6 +175,38 @@
       "invoiceNumber": "26a15415-9441-4f60-aab8-ec0f53540157",
       "status": "Valid",
       "collectionNo": "d1e40d34-32d2-4145-9691-70720ef8f3d9"
+    },
+    {
+      "id": "6950",
+      "amount": 200,
+      "collectionDate": "",
+      "invoiceNumber": "ffe7f684-eb61-4528-963e-1f715a01355e",
+      "status": "Valid",
+      "collectionNo": "fe1c172a-8bf3-4a71-81eb-4bbc69cda555"
+    },
+    {
+      "id": "79d1",
+      "amount": 300,
+      "collectionDate": "",
+      "invoiceNumber": "ffe7f684-eb61-4528-963e-1f715a01355e",
+      "status": "Valid",
+      "collectionNo": "f247fd02-2544-4ca6-be18-2742fa1b8ae4"
+    },
+    {
+      "id": "095d",
+      "amount": 10,
+      "collectionDate": "2024-06-03",
+      "invoiceNumber": "ffe7f684-eb61-4528-963e-1f715a01355e",
+      "status": "Valid",
+      "collectionNo": "2226df5d-9731-4b5f-a417-87beb36b923a"
+    },
+    {
+      "id": "b69f",
+      "amount": 20,
+      "collectionDate": "2024-06-03",
+      "invoiceNumber": "ffe7f684-eb61-4528-963e-1f715a01355e",
+      "status": "Valid",
+      "collectionNo": "65e69557-5700-4085-b06d-a117be295204"
     }
   ],
   "products": [

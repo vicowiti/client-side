@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react"
-import { Product } from "../types/global"
-import { getAllProducts } from "../services/products/data"
+import { useEffect } from "react"
 import { FaCheck } from "react-icons/fa6"
 import { FaTimes } from "react-icons/fa"
 import AddProduct from "../components/AddProducts"
+import { AppDispatch, RootState, useAppDispatch } from "../redux/store/store"
+import { useSelector } from "react-redux"
+import { getProducts } from "../redux/slices/ProductSlice"
 
 
 const Products = () => {
@@ -15,15 +16,15 @@ export default Products
 
 function ProductsTable() {
 
-    const [products, setProducts] = useState<Product[]>([])
+    const { products } = useSelector((state: RootState) => state.products)
+    const dispatch: AppDispatch = useAppDispatch()
 
     useEffect(() => {
         async function fetchProducts() {
-            const response = await getAllProducts()
-            setProducts(response)
+            await dispatch(getProducts())
         }
         fetchProducts()
-    }, [])
+    }, [dispatch])
     return (
         <div className="px-4 sm:px-6 lg:px-8">
             <div className="sm:flex sm:items-center">
@@ -57,9 +58,7 @@ function ProductsTable() {
                                         <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                             Active
                                         </th>
-                                        <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                                            <span className="sr-only">Edit</span>
-                                        </th>
+
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-200 bg-white">
@@ -72,11 +71,7 @@ function ProductsTable() {
                                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{product.target}</td>
                                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{product.description.substring(0, 20)}...</td>
                                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{product.active ? <FaCheck color="green" /> : <FaTimes color="red" />}</td>
-                                            <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                                <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                                                    Edit<span className="sr-only">, {product.name}</span>
-                                                </a>
-                                            </td>
+
                                         </tr>
                                     ))}
                                 </tbody>

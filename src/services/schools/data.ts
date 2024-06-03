@@ -24,7 +24,7 @@ export const getSchoolById = async (id: string) => {
   }
 };
 
-type NewSchool = Omit<School, "id">;
+export type NewSchool = Omit<School, "id">;
 
 export const createSchool = async (school: NewSchool) => {
   try {

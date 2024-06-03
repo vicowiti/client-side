@@ -17,7 +17,7 @@ export const getSchoolInvoices = async (id: string) => {
 
   return currentInvoices;
 };
-type CreateInvoice = Omit<Invoice, "id">;
+export type CreateInvoice = Omit<Invoice, "id">;
 
 export const createInvoice = async (invoice: CreateInvoice) => {
   try {

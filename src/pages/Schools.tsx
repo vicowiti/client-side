@@ -1,24 +1,27 @@
-import { useEffect, useState } from "react"
-import { getAllSchools } from "../services/schools/data"
-import { School } from "../types/global"
+import { useEffect } from "react"
+
 import SchoolsTable from "../components/SchoolsTable"
+import { useSelector } from "react-redux"
+import { AppDispatch, RootState, useAppDispatch } from "../redux/store/store"
+import { getSchools } from "../redux/slices/SchoolSlice"
 
 
 
 
 const Schools = () => {
-    const [schools, setSchools] = useState<School[]>([])
 
+    const { schools } = useSelector((state: RootState) => state.schools)
+    const dispatch: AppDispatch = useAppDispatch()
 
     useEffect(() => {
 
         async function fetchSchools() {
-            const mySchools = await getAllSchools()
-            setSchools(mySchools)
+
+            await dispatch(getSchools())
         }
 
         fetchSchools()
-    }, [])
+    }, [dispatch])
 
 
     return (

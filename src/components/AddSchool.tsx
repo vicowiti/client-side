@@ -5,26 +5,25 @@ import Input from './Input'
 import { useFormik } from 'formik'
 import { newSchoolSchema } from '../validations/authValidations'
 import { Product } from '../types/global'
-import { getAllProducts } from '../services/products/data'
-import { createSchool } from '../services/schools/data'
+import { AppDispatch, RootState, useAppDispatch } from '../redux/store/store'
+import { addNewSchool } from '../redux/slices/SchoolSlice'
+import { getProducts } from '../redux/slices/ProductSlice'
+import { useSelector } from 'react-redux'
 
 
 export default function AddSchool() {
     const [open, setOpen] = useState(false)
-    const [myProducts, setMyProducts] = useState<Product[]>([])
+    const { products } = useSelector((state: RootState) => state.products)
     const [selectedProducts, setSelectedProducts] = useState<string[]>([])
+    const dispatch: AppDispatch = useAppDispatch()
 
     useEffect(() => {
         async function fetchProducts() {
 
-
-            const productResponse = await getAllProducts()
-            setMyProducts(productResponse)
-
-
+            dispatch(getProducts())
         }
         fetchProducts()
-    }, [])
+    }, [dispatch])
 
     const formik = useFormik({
         initialValues: {
@@ -42,7 +41,8 @@ export default function AddSchool() {
         onSubmit: async (values, { resetForm }) => {
             try {
 
-                await createSchool({ ...values, products: selectedProducts })
+                await dispatch(addNewSchool({ ...values, products: selectedProducts }))
+
                 setOpen(false)
 
             } catch (err) {
@@ -128,7 +128,7 @@ export default function AddSchool() {
                                                         </label>
                                                         <div className='grid grid-cols-2'>
 
-                                                            {myProducts.map(product => <div key={product.id} className='flex items-center gap-2 p-3 shadow'>
+                                                            {products.map(product => <div key={product.id} className='flex items-center gap-2 p-3 shadow'>
                                                                 <input value={product.id} type='checkbox' onChange={e => handleProductSelection(e, product)} />
                                                                 <label htmlFor={product.name}>{product.name}</label>
                                                             </div>)}

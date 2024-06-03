@@ -23,7 +23,7 @@ export const getInvoiceCollections = async (invoiceNo: string) => {
   return currentInvoiceCollections;
 };
 
-type NewCollection = Omit<Collection, "id">;
+export type NewCollection = Omit<Collection, "id">;
 
 export const createCollection = async (collection: NewCollection) => {
   // Get the invoice

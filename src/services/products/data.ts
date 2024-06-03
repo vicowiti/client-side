@@ -13,7 +13,7 @@ export const getAllProducts = async () => {
   }
 };
 
-type MyProduct = Omit<Product, "id">;
+export type MyProduct = Omit<Product, "id">;
 
 export const createProduct = async (product: MyProduct) => {
   try {

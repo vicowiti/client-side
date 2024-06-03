@@ -2,8 +2,9 @@ import { Fragment, useRef, useState } from 'react'
 import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from '@headlessui/react'
 import { AiOutlineProduct } from 'react-icons/ai'
 import Input from './Input'
-import { createProduct } from '../services/products/data'
 import { toast } from 'sonner'
+import { AppDispatch, useAppDispatch } from '../redux/store/store'
+import { addNewProduct } from '../redux/slices/ProductSlice'
 
 export default function AddProduct() {
     const [open, setOpen] = useState(false)
@@ -11,6 +12,7 @@ export default function AddProduct() {
     const [productTarget, setProductTarget] = useState('')
     const [productDescription, setProductDescription] = useState('')
     const [productActive, setProductActive] = useState<'active' | 'inactive'>('active')
+    const dispatch: AppDispatch = useAppDispatch()
 
     const cancelButtonRef = useRef(null)
 
@@ -21,14 +23,12 @@ export default function AddProduct() {
             return
         }
 
-        await createProduct({
+        await dispatch(addNewProduct({
             name: productName,
             target: Number(productTarget),
             description: productDescription,
             active: productActive === "active" ? true : false,
-
-
-        })
+        }))
 
         toast.success("Product created")
         setOpen(false)

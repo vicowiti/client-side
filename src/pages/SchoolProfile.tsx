@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { Invoice, Product, School } from "../types/global"
+import { Product, School } from "../types/global"
 import { getSchoolById } from "../services/schools/data"
 import { IoSchool } from "react-icons/io5"
 import { MdLocationOn } from "react-icons/md"
 import { FaPhone, FaSchoolCircleCheck } from "react-icons/fa6"
 import { getAllProducts } from "../services/products/data"
 import { FaDotCircle } from "react-icons/fa"
-import { getSchoolInvoices } from "../services/invoices/data"
-import SchoolInvoices from "../components/SchoolInvoices"
 import { Donut } from "../components/charting/Donut"
+import { AppDispatch, RootState, useAppDispatch } from "../redux/store/store"
+import { getOneSchoolInvoices } from "../redux/slices/InvoiceSlice"
+import { useSelector } from "react-redux"
+import SchoolInvoices from "../components/SchoolInvoices"
 
 
 
@@ -17,7 +19,9 @@ const SchoolProfile = () => {
     const { id } = useParams()
     const [school, setSchool] = useState<School | null>(null)
     const [products, setProducts] = useState<Product[]>([])
-    const [invoices, setInvoices] = useState<Invoice[]>([])
+    const dispatch: AppDispatch = useAppDispatch()
+
+    const { schoolInvoices } = useSelector((state: RootState) => state.invoices)
 
     useEffect(() => {
         async function fetchSchool() {
@@ -26,8 +30,7 @@ const SchoolProfile = () => {
                 setSchool(response)
                 const productResponse = await getAllProducts()
                 setProducts(productResponse)
-                const invoiceResponse = await getSchoolInvoices(id)
-                setInvoices(invoiceResponse)
+                await dispatch(getOneSchoolInvoices(id))
             }
         }
         fetchSchool()
@@ -86,7 +89,7 @@ const SchoolProfile = () => {
 
             <main >
                 <section className="bg-white rounded-lg p-3 my-5">
-                    {id && <SchoolInvoices id={id} invoices={invoices} usedProducts={usedProducts} />}
+                    {id && <SchoolInvoices id={id} invoices={schoolInvoices} usedProducts={usedProducts} />}
                 </section>
 
             </main >
