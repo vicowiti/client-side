@@ -41,3 +41,5 @@ export const getGreeting = () => {
     return "Good evening!";
   }
 };
+
+export const BASE_URL = "https://json-server-deploy-xut9.onrender.com";

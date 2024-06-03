@@ -2,10 +2,11 @@ import axios from "axios";
 import { Collection, Invoice } from "../../types/global";
 import { toast } from "sonner";
 import { editInvoice, getAllInvoices } from "../invoices/data";
+import { BASE_URL } from "../../utils/global";
 
 export const getAllCollections = async () => {
   const response = await axios.get(
-    `${import.meta.env.VITE_BASE_URL}/collection`
+    `${BASE_URL}/collection`
   );
 
   return response.data;
@@ -33,7 +34,7 @@ export const createCollection = async (collection: NewCollection) => {
   //  Update the invoice
   try {
     const response = await axios.post(
-      `${import.meta.env.VITE_BASE_URL}/collection`,
+      `${BASE_URL}/collection`,
       collection
     );
     toast.success("Collection Created");
@@ -74,7 +75,7 @@ export const editCollection = async (collection: Collection, id: string) => {
   // Update the invoice
   try {
     const response = await axios.put(
-      `${import.meta.env.VITE_BASE_URL}/collection/${id}`,
+      `${BASE_URL}/collection/${id}`,
       collection
     );
     toast.success("Collection Edited");

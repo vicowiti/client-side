@@ -8,6 +8,7 @@ import { useFormik } from 'formik';
 import { User } from '../types/global';
 import axios from 'axios';
 import { toast } from 'sonner';
+import { BASE_URL } from '../utils/global';
 
 const AuthForm = () => {
     const navigate = useNavigate()
@@ -25,7 +26,7 @@ const AuthForm = () => {
         onSubmit: async (values, { resetForm }) => {
             try {
 
-                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/users`)
+                const response = await axios.get(`${BASE_URL}/users`)
                 const users: User[] = response.data
 
                 const exists = users.find(item => item.email === values.email)
